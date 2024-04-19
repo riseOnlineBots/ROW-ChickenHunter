@@ -9,9 +9,16 @@ import win32con
 import win32gui
 
 import keyboard_detector
+from admin_privileges import running_as_admin
+from device_validation import DeviceValidation
 from windowcapture import WindowCapture
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
+registered_devices = ['D8-BB-C1-17-F1-9E', '04-7C-16-5B-06-1D']
+
+device_registration = DeviceValidation(registered_devices)
+running_as_admin()
 
 keyboard_monitor = keyboard_detector.KeyboardDetector()
 keyboard_monitor.start()
@@ -133,10 +140,15 @@ def run_thread(_pause_event, _max_camp):
 
 
 if __name__ == '__main__':
-    print('Set the resolution windowed 1920x1080')
-    print("If you haven't set the resolution yet, close the program and try again.")
-    print('To pause/resume the bot, simultaneously press RIGHT CTRL and RIGHT ALT.')
-    print('The bot begins in 3 seconds')
+    # print('Set the resolution windowed 1920x1080')
+    # print("If you haven't set the resolution yet, close the program and try again.")
+    # print('To pause/resume the bot, simultaneously press RIGHT CTRL and RIGHT ALT.')
+    # print('The bot begins in 3 seconds')
+
+    print('1920x1080 pencere modunda ayarla oyunu')
+    print('Henuz cozunurlugu ayarlamadiysan, programi kapatip tekrar ac')
+    print('Duraklatmak/devam ettirmek icin SAG CTRL ve SAG ALT tuslarina aynanda bas')
+    print('Bot 3 saniye icinde basliyor')
     time.sleep(3)
 
     win32gui.SetForegroundWindow(hwnd)
