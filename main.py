@@ -140,19 +140,20 @@ def run_thread(_pause_event, _max_camp):
 
 
 if __name__ == '__main__':
-    # print('Set the resolution windowed 1920x1080')
-    # print("If you haven't set the resolution yet, close the program and try again.")
-    # print('To pause/resume the bot, simultaneously press RIGHT CTRL and RIGHT ALT.')
-    # print('The bot begins in 3 seconds')
+    if device_registration.is_device_legal():
+        # print('Set the resolution windowed 1920x1080')
+        # print("If you haven't set the resolution yet, close the program and try again.")
+        # print('To pause/resume the bot, simultaneously press RIGHT CTRL and RIGHT ALT.')
+        # print('The bot begins in 3 seconds')
 
-    print('1920x1080 pencere modunda ayarla oyunu')
-    print('Henuz cozunurlugu ayarlamadiysan, programi kapatip tekrar ac')
-    print('Duraklatmak/devam ettirmek icin SAG CTRL ve SAG ALT tuslarina aynanda bas')
-    print('Bot 3 saniye icinde basliyor')
-    time.sleep(3)
+        print('1920x1080 pencere modunda ayarla oyunu')
+        print('Henuz cozunurlugu ayarlamadiysan, programi kapatip tekrar ac')
+        print('Duraklatmak/devam ettirmek icin SAG CTRL ve SAG ALT tuslarina aynanda bas')
+        print('Bot 3 saniye icinde basliyor')
+        time.sleep(3)
 
-    win32gui.SetForegroundWindow(hwnd)
-    max_camp = 3
-    pause_event = ThreadEvent()
-    thread = Thread(target=run_thread, args=(pause_event, max_camp,))
-    thread.start()
+        win32gui.SetForegroundWindow(hwnd)
+        max_camp = 3
+        pause_event = ThreadEvent()
+        thread = Thread(target=run_thread, args=(pause_event, max_camp,))
+        thread.start()
