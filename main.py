@@ -15,7 +15,8 @@ from windowcapture import WindowCapture
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
-registered_devices = ['D8-BB-C1-17-F1-9E', '04-7C-16-5B-06-1D']
+# Disabled mac validation for the public release.
+# registered_devices = ['D8-BB-C1-17-F1-9E', '04-7C-16-5B-06-1D']
 
 device_registration = DeviceValidation(registered_devices)
 running_as_admin()
@@ -53,30 +54,12 @@ def mouse_click(target_x=None, target_y=None, times=1):
     if target_x is None or target_y is None:
         raise ValueError("Both x and y must be provided.")
 
-    # Calling win32gui allows us to re-calculate coordinates dynamically in case the window is moved
-    # window.get_rect() calculates the window position once it's initialised.
     rect = win32gui.GetWindowRect(hwnd)
     win_x, win_y, _, _ = rect
 
     rel_target_x = target_x + win_x
     rel_target_y = target_y + win_y
-
-    # lParam = win32api.MAKELONG(rel_target_x, rel_target_y)
-    # win32api.SendMessage(hwnd, win32con.WM_MOUSEMOVE, 0, lParam)
-    # button_down_msg = None
-    # button_up_msg = None
-
-    # button_down_msg = win32con.WM_LBUTTONDOWN
-    # button_up_msg = win32con.WM_LBUTTONUP
-    # button_down_msg = win32con.WM_RBUTTONDOWN
-    # button_up_msg = win32con.WM_RBUTTONUP
-
-    # if button_down_msg is not None:
-    #     win32api.SendMessage(hwnd, button_down_msg, win32con.MK_LBUTTON, lParam)
-
-    # if button_up_msg is not None:
-    #     win32api.SendMessage(hwnd, button_up_msg, 0, lParam)
-
+    
     win32api.SetCursorPos((rel_target_x, rel_target_y))
     sleep(min_delay=0.1, max_delay=0.2)
 
@@ -140,20 +123,19 @@ def run_thread(_pause_event, _max_camp):
 
 
 if __name__ == '__main__':
-    if device_registration.is_device_legal():
-        # print('Set the resolution windowed 1920x1080')
-        # print("If you haven't set the resolution yet, close the program and try again.")
-        # print('To pause/resume the bot, simultaneously press RIGHT CTRL and RIGHT ALT.')
-        # print('The bot begins in 3 seconds')
+    # print('Set the resolution windowed 1920x1080')
+    # print("If you haven't set the resolution yet, close the program and try again.")
+    # print('To pause/resume the bot, simultaneously press RIGHT CTRL and RIGHT ALT.')
+    # print('The bot begins in 3 seconds')
 
-        print('1920x1080 pencere modunda ayarla oyunu')
-        print('Henuz cozunurlugu ayarlamadiysan, programi kapatip tekrar ac')
-        print('Duraklatmak/devam ettirmek icin SAG CTRL ve SAG ALT tuslarina aynanda bas')
-        print('Bot 3 saniye icinde basliyor')
-        time.sleep(3)
+    print('1920x1080 pencere modunda ayarla oyunu')
+    print('Henuz cozunurlugu ayarlamadiysan, programi kapatip tekrar ac')
+    print('Duraklatmak/devam ettirmek icin SAG CTRL ve SAG ALT tuslarina aynanda bas')
+    print('Bot 3 saniye icinde basliyor')
+    time.sleep(3)
 
-        win32gui.SetForegroundWindow(hwnd)
-        max_camp = 3
-        pause_event = ThreadEvent()
-        thread = Thread(target=run_thread, args=(pause_event, max_camp,))
-        thread.start()
+    win32gui.SetForegroundWindow(hwnd)
+    max_camp = 3
+    pause_event = ThreadEvent()
+    thread = Thread(target=run_thread, args=(pause_event, max_camp,))
+    thread.start()
